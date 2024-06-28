@@ -1,0 +1,48 @@
+/* BookFind.css */
+.custom-table {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    overflow: hidden;
+  }
+  
+  .custom-table th, .custom-table td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .custom-table thead {
+    background-color: #f8f9fa; /* Light gray background */
+    color: #212529; /* Dark text color */
+  }
+  
+  .custom-table tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White background for even rows */
+  }
+  
+  .custom-table tbody tr:hover {
+    background-color: #f2f2f2; /* Light gray background on hover */
+  }
+  
+  .form-control {
+    background-color: #ffffff; /* White background for input fields */
+    color: #495057; /* Dark text color for input fields */
+  }
+  
+  .form-check-input {
+    background-color: #f8f9fa; /* Light gray background for form check */
+  }
+
+.search-input {
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ced4da; /* Light gray border */
+    border-radius: 0.25rem;
+    color: #495057; /* Dark text color */
+    padding: 0.5rem 1rem; /* Padding inside the input */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Smooth transition for border and box-shadow */
+  }
+  
+  .search-input:focus {
+    border-color: #80bdff; /* Border color on focus */
+    outline: 0; /* Remove default focus outline */
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Focus shadow */
+  }

@@ -1,9 +1,10 @@
 import React,{ useEffect, useState } from 'react';
-import { Col, Container, Form, FormCheck, FormControl, ListGroup, Row, Table } from 'react-bootstrap';
+import { Col, Container, Form, FormCheck, FormControl, ListGroup, Row, Spinner, Table } from 'react-bootstrap';
 import debounce from 'debounce';
 import axios from 'axios';
-import { Book } from '../types/Book';
-
+import { Book } from '../../types/Book';
+import BookTable from '../BookTable/BookTable';
+import ScrollToTopButton from '../ScrollToTop/ScrollToTop';
 
 const BookFind = (): React.ReactElement =>{
     const [query, setQuery] = React.useState('');
@@ -11,6 +12,8 @@ const BookFind = (): React.ReactElement =>{
     const [initialData, setInitialData] = useState<Book[]>([]);
     const [sortedBooks, setSortedBooks] = useState<Book[]>([]);
     const [sortByYear,setSortByYear] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
@@ -33,6 +36,7 @@ const BookFind = (): React.ReactElement =>{
 
     const fetchBooks = async (searchTerm: string) => {
         try {
+            setIsLoading(true); // Start loading animation
             console.log(searchTerm);
             const formattedSearchTerm = searchTerm.replace(/\s/g, '+'); 
             console.log(formattedSearchTerm);
@@ -49,9 +53,13 @@ const BookFind = (): React.ReactElement =>{
           }));
            setInitialData(booksData);
            sortBooksByYearDescending(booksData);
+           setIsLoading(false); // Stop loading animation
+
         //    console.log(initialData);
         } catch (error) {
           console.error('Error fetching books:', error);
+          setIsLoading(false); // Stop loading animation on error
+
         }
       };
 
@@ -75,13 +83,22 @@ const BookFind = (): React.ReactElement =>{
         setQuery(searchTerm);
     }
 
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); 
+            const searchTerm = event.currentTarget.value;
+            setQuery(searchTerm); 
+        }
+      };
+
 
 
         return(
-            <>
+            <div className="bg-light" style={{ minHeight: '100vh' }}>
+
 
             {/* @ts-ignore */}
-            <Container>
+            <Container d-flex flex-column justify-content-center align-items-center py-4>
                 {/* @ts-ignore */}
                 <Row className="justify-content-center mt-5">
                 {/* @ts-ignore */}
@@ -89,13 +106,16 @@ const BookFind = (): React.ReactElement =>{
                 <h1 className="text-center mb-4">Book Finder</h1>
 
                 {/* @ts-ignore */}
-                <Form>
+                <Form className='mb-2'>
                     {/* @ts-ignore */}
-                    <FormControl
+                    <FormControl 
                         type='text'
-                        placeholder='search for books'
+                        placeholder='Search for Books'
                         value={query}
-                        onChange={handleTyping}>
+                        onChange={handleTyping}
+                        onKeyPress={handleKeyPress}
+                        className="search-input mb-2">
+                        
 
                     </FormControl>
                                         {/* @ts-ignore */}
@@ -110,47 +130,34 @@ const BookFind = (): React.ReactElement =>{
                 </Form>
                 </Col>
                 </Row>
-                {books.length > 0 && (
+                {isLoading ? (
                     <>
+                                            {/* @ts-ignore */}
 
+        <Row className="justify-content-center mt-4">
+                                    {/* @ts-ignore */}
+
+          <Spinner  animation="border" role="status" variant='info' style={{ width: '5rem', height: '5rem' }} >
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+
+        </Row>
+        </>
+      ) :books.length > 0 && (
+                    <>
                         {/* @ts-ignore */}
         <Row className="mt-4">
                             {/* @ts-ignore */}
 
           <Col>
-                          {/* @ts-ignore */}
-
-
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Authors</th>
-                  <th>First Published Year</th>
-                  <th>ISBN</th>
-                  <th>Number of Pages</th>
-                </tr>
-              </thead>
-              <tbody>
-                {books.map((book, index) => (
-                    // console.log(book),
-                  <tr key={index}>
-                    <td>{book.title}</td>
-                    <td>{book.author_name ? book.author_name.join(', ') : 'Unknown Author'}</td>
-                    <td>{book.first_publish_year}</td>
-                    <td>{book.isbn ? book.isbn.join(', ') : 'No ISBN'}</td>
-                    <td>{book.number_of_pages_median}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+                        <BookTable books={books} />
           </Col>
         </Row>
         </>
       )}
-
+            <ScrollToTopButton/>
             </Container>
-            </>
+            </ div>
 
         );
 }

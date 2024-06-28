@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
-import BookFind from './components/BookFind';
+import BookFind from './components/BookFind/BookFind';
 
 function App() {
   return (
