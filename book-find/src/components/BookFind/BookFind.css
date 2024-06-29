@@ -1,48 +1,89 @@
-/* BookFind.css */
-.custom-table {
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-    overflow: hidden;
-  }
-  
-  .custom-table th, .custom-table td {
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .custom-table thead {
-    background-color: #f8f9fa; /* Light gray background */
-    color: #212529; /* Dark text color */
-  }
-  
-  .custom-table tbody tr:nth-child(even) {
-    background-color: #ffffff; /* White background for even rows */
-  }
-  
-  .custom-table tbody tr:hover {
-    background-color: #f2f2f2; /* Light gray background on hover */
-  }
-  
-  .form-control {
-    background-color: #ffffff; /* White background for input fields */
-    color: #495057; /* Dark text color for input fields */
-  }
-  
-  .form-check-input {
-    background-color: #f8f9fa; /* Light gray background for form check */
-  }
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+}
+
+
+.custom-heading {
+  color: #6c5ce7;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.bg-light-purple {
+  background-color: #d1c4e9;
+}
 
 .search-input {
-    background-color: #ffffff; /* White background */
-    border: 1px solid #ced4da; /* Light gray border */
-    border-radius: 0.25rem;
-    color: #495057; /* Dark text color */
-    padding: 0.5rem 1rem; /* Padding inside the input */
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Smooth transition for border and box-shadow */
+  border-radius: 25px;
+  border: 1px solid #ced4da;
+  padding: 10px 20px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-weight: bold;
+}
+
+.search-input:focus {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 5px rgba(108, 92, 231, 0.5);
+  outline: none;
+}
+
+.form-switch-lg .form-check-input {
+  width: 4rem;
+  height: 2rem;
+}
+
+
+.custom-table {
+  width: 100%;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.custom-table thead {
+  background-color: #6c5ce7;
+  color: #fff;
+  font-weight: bold;
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #e2e6ea;
+}
+
+.thick-spinner {
+  width: 5rem;
+  height: 5rem;
+  border-width: 0.5em;
+}
+
+
+@keyframes thick-spinner-border {
+  to {
+    transform: rotate(360deg);
   }
-  
-  .search-input:focus {
-    border-color: #80bdff; /* Border color on focus */
-    outline: 0; /* Remove default focus outline */
-    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Focus shadow */
-  }
+}
+
+.thick-spinner {
+  animation: thick-spinner-border 1.5s linear infinite;
+}

@@ -1,0 +1,64 @@
+.custom-table {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    background-color: #fff;
+    margin-bottom: 20px;
+    table-layout: fixed;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+    height: 50px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.custom-table thead {
+    background-color: #6c5ce7;
+    color: #fff;
+    font-weight: bold;
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #e2e6ea;
+}
+
+.custom-table th.title-col,
+.custom-table td.title-col {
+    width: 20%;
+}
+
+.custom-table th.authors-col,
+.custom-table td.authors-col {
+    width: 25%;
+}
+
+.custom-table th.year-col,
+.custom-table td.year-col {
+    width: 15%;
+}
+
+.custom-table th.isbn-col,
+.custom-table td.isbn-col {
+    width: 20%;
+}
+
+.custom-table th.pages-col,
+.custom-table td.pages-col {
+    width: 10%;
+}
+
+.custom-table th:last-child,
+.custom-table td:last-child {
+    width: calc(10% - 17px);
+}
