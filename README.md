@@ -63,10 +63,6 @@ Book Finder is a React-based web application that allows users to search for boo
 5. Scroll through the results or perform a new search as needed.
 
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
 ## Acknowledgments
 
 - [Open Library API](https://openlibrary.org/developers/api) for providing the book data
