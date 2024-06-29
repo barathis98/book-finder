@@ -22,7 +22,7 @@ const BookTable: React.FC<Props> = ({ books }) => {
           <tr>
             <th className="title-col">Title</th>
             <th className="authors-col">Authors</th>
-            <th className="year-col">First Published Year</th>
+            <th className="year-col">First Published</th>
             <th className="isbn-col">ISBN</th>
             <th className="pages-col">Number of Pages</th>
           </tr>
