@@ -2,7 +2,8 @@
 
 Book Finder is a React-based web application that allows users to search for books using the Open Library API. It provides a simple and intuitive interface for discovering books and viewing their details.
 
-![Book Finder Screenshot](![image](https://github.com/barathis98/book-finder/assets/114298089/7ce99949-964c-461a-b7b1-1832e5752fbe))
+![image](https://github.com/barathis98/book-finder/assets/114298089/be7802b1-2fb4-40fc-a660-091feec3f935)
+
 
 ## Features
 
