@@ -92,15 +92,18 @@ const BookFind = (): React.ReactElement => {
 
   const handleTyping = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
+     if (event.currentTarget.value === "") {
+      console.log("empty");
+      setBooks([]);
+      setInitialData([]);
+      setSortedBooks([]);
+      setNoResults(false);
+    }
     setQuery(searchTerm);
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.currentTarget.value === "") {
-      console.log("empty");
-      setBooks([]);
-      setNoResults(false);
-    }
+   
     if (event.key === "Enter") {
       event.preventDefault();
       const searchTerm = event.currentTarget.value;
@@ -159,8 +162,8 @@ const BookFind = (): React.ReactElement => {
             </Col>
           </Row>
         </>
-      ) : (
-        books.length > 0 && (
+      ) : 
+        books.length > 0 ? (
           <>
             <Container fluid>
               <Row className="mt-4">
@@ -171,6 +174,11 @@ const BookFind = (): React.ReactElement => {
             </Container>
           </>
         )
+       : (
+        <div className="text-center mt-4 background-text"
+        >
+          Discover Your Next Great Read
+        </div>
       )}
       <ScrollToTopButton />
     </div>

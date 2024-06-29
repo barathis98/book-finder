@@ -17,6 +17,8 @@ body {
   padding: 20px;
 }
 
+
+
 .bg-light-purple {
   background-color: #d1c4e9;
 }
@@ -86,4 +88,17 @@ body {
 
 .thick-spinner {
   animation: thick-spinner-border 1.5s linear infinite;
+}
+
+.background-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: rgba(0, 0, 0, 0.1);
+  font-size: 4rem;
+  font-weight: bold;
+  width: 100%;
+  z-index: 1;
 }
