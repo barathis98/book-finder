@@ -56,11 +56,11 @@ const BookFind = (): React.ReactElement => {
       );
       const data = response.data;
       const booksData: Book[] = data.docs.map((doc: any) => ({
-        title: doc.title || "Unknown",
-        author_name: doc.author_name || "Unknown",
-        first_publish_year: doc.first_publish_year || "Unknown",
-        isbn: doc.isbn || [],
-        number_of_pages_median: doc.number_of_pages_median || "Unknown",
+        title: doc.title ?? "Unknown",
+        author_name: doc.author_name ?? "Unknown",
+        first_publish_year: doc.first_publish_year ?? "Unknown",
+        isbn: doc.isbn ?? [],
+        number_of_pages_median: doc.number_of_pages_median ?? "Unknown",
       }));
       if (booksData.length === 0) {
         setNoResults(true);
@@ -112,7 +112,7 @@ const BookFind = (): React.ReactElement => {
   };
 
   return (
-    <div className="bg-light-purple" style={{ minHeight: "100vh" }}>
+    <div className="bg-light-purple " style={{ minHeight: "100vh" }}>
       <Row className="justify-content-center custom-heading-container mt-5">
         <Col md={8}>
           <h1 className="custom-heading text-center mb-4 mt-4">Book Finder</h1>
