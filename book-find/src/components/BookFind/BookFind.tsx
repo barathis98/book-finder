@@ -79,6 +79,10 @@ const BookFind = (): React.ReactElement => {
       console.error("Error fetching books:", error);
       setIsLoading(false); 
     }
+    finally {
+      setIsLoading(false);
+      cancelToken.current = null;
+    }
   };
 
   const sortBooksByYearDescending = (booksData: Book[]) => {
