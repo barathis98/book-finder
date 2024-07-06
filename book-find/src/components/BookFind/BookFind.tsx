@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Col,
   Container,
@@ -11,11 +11,12 @@ import {
   Table,
 } from "react-bootstrap";
 import debounce from "debounce";
-import axios from "axios";
+import axios, {Cancel, CancelTokenSource} from "axios";
 import { Book } from "../../types/Book";
 import BookTable from "../BookTable/BookTable";
 import ScrollToTopButton from "../ScrollToTop/ScrollToTop";
 import "./BookFind.css";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const BookFind = (): React.ReactElement => {
   const [query, setQuery] = React.useState("");
@@ -25,6 +26,7 @@ const BookFind = (): React.ReactElement => {
   const [sortByYear, setSortByYear] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [noResults, setNoResults] = useState(false);
+  const cancelToken = useRef<CancelTokenSource | null>(null);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -45,14 +47,17 @@ const BookFind = (): React.ReactElement => {
   }, [sortByYear, initialData, sortedBooks]);
 
   const fetchBooks = async (searchTerm: string) => {
+    if (cancelToken.current) {
+      cancelToken.current.cancel();
+    }
+    cancelToken.current = axios.CancelToken.source();
+
     try {
       setIsLoading(true); 
-      console.log(searchTerm);
       const formattedSearchTerm = searchTerm.replace(/\s/g, "+");
-      console.log(formattedSearchTerm);
 
       const response = await axios.get(
-        `https://openlibrary.org/search.json?q=${formattedSearchTerm}&fields=key,first_publish_year,author_name,title,number_of_pages_median,isbn`
+        `https://openlibrary.org/search.json?q=${formattedSearchTerm}&fields=key,first_publish_year,author_name,title,number_of_pages_median,isbn`,{cancelToken: cancelToken.current.token}
       );
       const data = response.data;
       const booksData: Book[] = data.docs.map((doc: any) => ({
@@ -64,11 +69,10 @@ const BookFind = (): React.ReactElement => {
       }));
       if (booksData.length === 0) {
         setNoResults(true);
-        setIsLoading(false); 
       } else {
         setInitialData(booksData);
         sortBooksByYearDescending(booksData);
-        setIsLoading(false);
+        
       }
 
     } catch (error) {
